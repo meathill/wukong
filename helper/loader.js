@@ -3,7 +3,7 @@ export function load(src, callback) {
   script.async = true;
   script.type = 'text/javascript';
   script.src = src;
-  document.body.appendChild(src);
+  document.body.appendChild(script);
   if (callback) {
     script.onload = callback;
   } else {

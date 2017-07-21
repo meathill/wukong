@@ -1,0 +1,11 @@
+@import "../node_modules/normalize.css/normalize.css";
+html,
+body {
+  height: 100%;
+}
+.container {
+  width: 100vw;
+  height: 100vh;
+  position: absolute;
+}
+/*# sourceMappingURL=preloader.css.map */

@@ -3,7 +3,7 @@ import cdn from './cdn.json';
 
 /* global BASE_PATH */
 
-export class Wukong {
+export default class Wukong {
   constructor({loading, progress}) {
     this.loading = loading;
     this.progress = document.querySelector(progress);
@@ -28,7 +28,7 @@ export class Wukong {
           if (this.assets[i] instanceof Array) {
             this.queue.loadManifest(this.assets[i]);
           } else {
-            this.loadFile(this.assets[i]);
+            this.queue.loadFile(this.assets[i]);
           }
         }
       });
