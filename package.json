@@ -1,0 +1,12 @@
+{
+  "name": "wukong",
+  "version": "0.1.0",
+  "description": "wukong is a h5 framework with some simple features like preload",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "Meathill <meathill@gmail.com> (http://meathill.com/)",
+  "license": "MIT"
+}
