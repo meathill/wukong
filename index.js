@@ -36,7 +36,7 @@ export default class Wukong {
 
   onComplete() {
     console.log('Wukong: all loaded');
-    let app = new Homepage(this.queue);
+    let app = new H5App(this.queue);
   }
 
   onProgress(event) {

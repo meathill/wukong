@@ -1,9 +1,8 @@
-import $ from 'sizzle';
 import {sleep} from './helper/next';
 
 /* global Router,URL */
 
-export default class AbstractHomepage {
+export default class AbstractH5App {
   constructor(queue) {
     this.queue = queue;
     this.pages = {};
@@ -12,28 +11,40 @@ export default class AbstractHomepage {
     this.showHomepage();
   }
 
-  createPage() {
+  createPage(name) {
+    if (this.pages[name]) {
+      return this.pages[name];
+    }
     let html = this.getTemplate(name);
+    html = html.replace(/{{(.*)}}/g, (match, url) => {
+      return this.getResourceURL(url);
+    });
     let page = document.createElement('div');
     page.innerHTML = html;
-    page.className = `container page out ${name}`;
-    let url = this.getResourceURL(name);
-    if (url) {
-      page.style.backgroundImage = `url(${url})`;
-      page = document.body.appendChild(page);
+    page.id = name;
+    page.className = 'container page out';
+    this.pages[name] = page;
+    // 看是否需要用类包裹
+    let klass = this.getKlass(name);
+    if (klass) {
+      new klass(page);
     }
     return page;
   }
 
   createRouter() {
     let router = Router(this.getRouter());
-    router.init('/home');
+    router.init();
   }
 
   delegateEvent() {
     document.body.addEventListener('transitionend', this.onTransitionEnd, false);
     document.body.addEventListener('animationend', this.onAnimationEnd, false);
     document.body.addEventListener('click', this.onClick, false);
+  }
+
+  getKlass(name) {
+
   }
 
   getRouter() {
@@ -55,8 +66,7 @@ export default class AbstractHomepage {
   }
 
   goToPage(page) {
-    let el = this.pages[page] || this.createPage(page);
-    this.pages[page] = el;
+    let el = this.createPage(page);
     sleep(1)
       .then(() => {
         el.classList.remove('hide');
