@@ -16,6 +16,10 @@ export default class AbstractH5App {
       return this.pages[name];
     }
     let html = this.getTemplate(name);
+    if (!html) {
+      console.log('没有此页面');
+      return;
+    }
     html = this.replaceURL(html);
     let page = document.createElement('div');
     let options = this.getPageOptions(name);
@@ -91,8 +95,8 @@ export default class AbstractH5App {
       if (current) {
         current.classList.remove('in');
         current.classList.add('out');
-        return;
       }
+      return;
     }
     let el = this.createPage(page);
     el.classList.remove('hide');
