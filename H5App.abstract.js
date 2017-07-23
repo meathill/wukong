@@ -16,10 +16,19 @@ export default class AbstractH5App {
       return this.pages[name];
     }
     let html = this.getTemplate(name);
-    html = html.replace(/{{(.*)}}/g, (match, url) => {
-      return this.getResourceURL(url);
-    });
+    html = this.replaceURL(html);
     let page = document.createElement('div');
+    let options = this.getPageOptions(name);
+    if (options) {
+      for (let prop in options) {
+        if (!options.hasOwnProperty(prop)) {
+          continue;
+        }
+        let value = options[prop];
+        value = this.replaceURL(value);
+        page[prop] = value;
+      }
+    }
     page.innerHTML = html;
     page.id = name;
     page.className = 'container page out';
@@ -29,7 +38,14 @@ export default class AbstractH5App {
     if (klass) {
       new klass(page);
     }
+    document.body.appendChild(page);
     return page;
+  }
+
+  replaceURL(html) {
+    return html.replace(/{{(.*)}}/g, (match, url) => {
+      return this.getResourceURL(url);
+    });
   }
 
   createRouter() {
@@ -47,14 +63,14 @@ export default class AbstractH5App {
 
   }
 
+  getPageOptions(name) {
+
+  }
+
   getRouter() {
     return {
       '/:page': this.goToPage.bind(this)
     };
-  }
-
-  getTemplate(page) {
-
   }
 
   getResourceURL(name) {
@@ -65,13 +81,14 @@ export default class AbstractH5App {
     return URL.createObjectURL(blob);
   }
 
+  getTemplate(page) {
+
+  }
+
   goToPage(page) {
     let el = this.createPage(page);
-    sleep(1)
-      .then(() => {
-        el.classList.remove('hide');
-        el.classList.remove('out');
-      });
+    el.classList.remove('hide', 'out');
+    el.classList.add('in');
   }
 
   showHomepage() {

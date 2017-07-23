@@ -3,12 +3,19 @@
 
 html,body
   height 100%
+  box-sizing border-box
+
+*,
+*::before
+*::after
+  box-sizing inherit
 
 html
   font-size 16px
 
 body
   font-family $body-font
+  overflow hidden
 
 .container
   width 100vw

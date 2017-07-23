@@ -2,12 +2,19 @@
 html,
 body {
   height: 100%;
+  box-sizing: border-box;
+}
+*,
+*::before,
+*::after {
+  box-sizing: inherit;
 }
 html {
   font-size: 16px;
 }
 body {
   font-family: font-family -apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "PingFang SC", "Hiragino Sans GB", "Heiti SC", "Microsoft YaHei", "WenQuanYi Micro Hei", sans-serif;
+  overflow: hidden;
 }
 .container {
   width: 100vw;
