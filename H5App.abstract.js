@@ -1,4 +1,4 @@
-import {sleep} from './helper/next';
+import $ from 'sizzle';
 
 /* global Router,URL */
 
@@ -31,7 +31,7 @@ export default class AbstractH5App {
     }
     page.innerHTML = html;
     page.id = name;
-    page.className = 'container page out';
+    page.className = 'container page out hide';
     this.pages[name] = page;
     // 看是否需要用类包裹
     let klass = this.getKlass(name);
@@ -50,7 +50,7 @@ export default class AbstractH5App {
 
   createRouter() {
     let router = Router(this.getRouter());
-    router.init();
+    router.init('#/home');
   }
 
   delegateEvent() {
@@ -86,9 +86,21 @@ export default class AbstractH5App {
   }
 
   goToPage(page) {
+    if (page === 'home') {
+      let current = $('.container.in')[0];
+      if (current) {
+        current.classList.remove('in');
+        current.classList.add('out');
+        return;
+      }
+    }
     let el = this.createPage(page);
-    el.classList.remove('hide', 'out');
-    el.classList.add('in');
+    el.classList.remove('hide');
+    setTimeout(() => {
+      el.classList.remove('out');
+      el.classList.add('in');
+    }, 50);
+
   }
 
   showHomepage() {
@@ -104,6 +116,9 @@ export default class AbstractH5App {
   }
 
   onTransitionEnd(event) {
-
+    let target = event.target;
+    if (target.classList.contains('container') && target.classList.contains('out')) {
+      target.classList.add('hide');
+    }
   }
 }
