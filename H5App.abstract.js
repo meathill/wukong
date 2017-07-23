@@ -29,8 +29,13 @@ export default class AbstractH5App {
           continue;
         }
         let value = options[prop];
-        value = this.replaceURL(value);
-        page[prop] = value;
+        if (prop !== 'style') {
+          value = this.replaceURL(value);
+          page[prop] = value;
+          continue;
+        }
+        let kv = value.split(':');
+        page.style[kv[0]] = this.replaceURL(kv[1]);
       }
     }
     page.innerHTML = html;
