@@ -1,0 +1,25 @@
+html,body
+  height 100%
+
+*,
+*::before
+*::after
+  box-sizing inherit
+
+html
+  font-size 16px
+  box-sizing border-box
+
+body
+  font-family $body-font
+  overflow hidden
+
+.visually-hidden
+  border 0
+  clip rect(0,0,0,0)
+  position absolute
+  width 1px
+  height 1px
+  margin -1px
+  overflow hidden
+  padding 0

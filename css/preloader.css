@@ -460,8 +460,18 @@ html {
   box-sizing: border-box;
 }
 body {
-  font-family: font-family -apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "PingFang SC", "Hiragino Sans GB", "Heiti SC", "Microsoft YaHei", "WenQuanYi Micro Hei", sans-serif;
+  font-family: $body-font;
   overflow: hidden;
+}
+.visually-hidden {
+  border: 0;
+  clip: rect(0, 0, 0, 0);
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  overflow: hidden;
+  padding: 0;
 }
 .container {
   width: 100vw;
