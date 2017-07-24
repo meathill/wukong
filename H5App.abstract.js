@@ -11,10 +11,11 @@ export default class AbstractH5App {
     this.showHomepage();
   }
 
-  createPage(name) {
+  createPage(name, container) {
     if (this.pages[name]) {
       return this.pages[name];
     }
+    container = container || document.body;
     let html = this.getTemplate(name);
     if (!html) {
       console.log('没有此页面');
@@ -47,7 +48,7 @@ export default class AbstractH5App {
     if (klass) {
       new klass(page);
     }
-    document.body.appendChild(page);
+    container.appendChild(page);
     return page;
   }
 
