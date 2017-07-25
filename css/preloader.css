@@ -484,4 +484,27 @@ body.is-swiper .container {
 body.is-nav .container {
   position: absolute;
 }
+#player {
+  position: absolute;
+  top: 1em;
+  right: 1em;
+  color: #fff;
+  width: 1.5em;
+  height: 1.5em;
+  border: 1px solid #fff;
+  border-radius: 50%;
+  text-align: center;
+  z-index: 20;
+}
+#player i {
+  line-height: 1.25em;
+}
+#player.disabled::after {
+  border-left: 1px solid #fff;
+  transform: translate3d(0.7em, -1.35em, 0) rotate(-45deg);
+  content: '';
+  height: 1.5em;
+  display: block;
+  position: absolute;
+}
 /*# sourceMappingURL=preloader.css.map */

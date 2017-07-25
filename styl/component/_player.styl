@@ -1,0 +1,22 @@
+#player
+  position absolute
+  top 1em
+  right 1em
+  color white
+  width 1.5em
+  height 1.5em
+  border 1px solid white
+  border-radius 50%
+  text-align center
+  z-index 20
+
+  i
+    line-height 1.25em
+
+  &.disabled::after
+    border-left 1px solid white
+    transform translate3d(.7em, -1.35em, 0) rotate(-45deg)
+    content ''
+    height 1.5em
+    display block
+    position absolute

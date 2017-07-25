@@ -1,7 +1,7 @@
 import {load} from './helper/loader';
 import cdn from './cdn.json';
 
-/* global BASE_PATH */
+/* global BASE_PATH,isWeixin */
 
 export default class Wukong {
   constructor({loading, progress}) {
@@ -37,6 +37,10 @@ export default class Wukong {
   onComplete() {
     console.log('Wukong: all loaded');
     let app = new H5App(this.queue);
+
+    if (!isWeixin) {
+      autoPlayMusic();
+    }
   }
 
   onProgress(event) {
