@@ -2,7 +2,7 @@
   "name": "wukong",
   "version": "0.1.0",
   "description": "wukong is a h5 framework with some simple features like preload",
-  "main": "index.js",
+  "main": "wukong.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "stylus": "mkdir css & stylus -m --include-css styl/preloader.styl -o css/"
@@ -11,6 +11,14 @@
   "author": "Meathill <meathill@gmail.com> (http://meathill.com/)",
   "license": "MIT",
   "devDependencies": {
-    "normalize.css": "^7.0.0"
+    "@babel/core": "^7.1.6",
+    "@babel/preset-env": "^7.1.6",
+    "babel-loader": "^8.0.4",
+    "webpack": "^4.26.1",
+    "webpack-cli": "^3.1.2"
+  },
+  "dependencies": {
+    "normalize.css": "^8.0.1",
+    "sizzle": "^2.3.3"
   }
 }
