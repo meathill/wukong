@@ -24,12 +24,22 @@ export default class View extends EventEmitter {
     this.el.addEventListener('animationend', event => {
       if (event.target === this.el && event.animationName === 'fadeOut') {
         this.el.classList.add('hide');
+        if (this.hidden) {
+          this.hidden();
+        }
       }
     });
   }
 
-  fadeOut() {
-    this.el.classList.add('animated', 'fadeOut');
+  enter() {
+    this.el.classList.remove('pause');
+  }
+
+  exit() {
+    return new Promise(resolve => {
+      this.el.classList.add('animated', 'fadeOut');
+      this.hidden = resolve;
+    });
   }
 
   getAssetUrl(asset) {

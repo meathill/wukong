@@ -1,4 +1,5 @@
 import $ from 'sizzle';
+import View from './View.abstract';
 
 /* global Router,URL */
 
@@ -16,14 +17,23 @@ export default class AbstractH5App {
       return this.pages[name];
     }
     container = container || document.body;
+    const options = this.getPageOptions(name);
     let html = this.getTemplate(name);
     if (!html) {
       console.log('没有此页面');
       return;
     }
+
+    if (typeof html !== 'string') {
+      const page = new html(null, this.queue, options);
+      page.router = this.router;
+      container.appendChild(page.el);
+      this.pages[name] = page;
+      return page;
+    }
+
     html = this.replaceURL(html);
     let page = document.createElement('div');
-    let options = this.getPageOptions(name);
     if (options) {
       for (let prop in options) {
         if (!options.hasOwnProperty(prop)) {
@@ -59,7 +69,7 @@ export default class AbstractH5App {
   }
 
   createRouter() {
-    let router = Router(this.getRouter());
+    let router = this.router = Router(this.getRouter());
     router.init('#/home');
   }
 
@@ -96,21 +106,14 @@ export default class AbstractH5App {
   }
 
   goToPage(page) {
-    if (page === 'home') {
-      let current = $('.container.in')[0];
-      if (current) {
-        current.classList.remove('in');
-        current.classList.add('out');
-      }
-      return;
-    }
-    let el = this.createPage(page);
-    el.classList.remove('hide');
-    setTimeout(() => {
-      el.classList.remove('out');
-      el.classList.add('in');
-    }, 50);
-
+    const p = this.currentPage ? this.currentPage.exit() : Promise.resolve();
+    p
+      .then(() => {
+        if (page !== 'home') {
+          page = this.createPage(page);
+        }
+        this.currentPage = page;
+      });
   }
 
   showHomepage() {
