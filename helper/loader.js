@@ -13,3 +13,10 @@ export function load(src, callback) {
     });
   }
 }
+
+export function loadCSS(href) {
+  const link = document.createElement('link');
+  link.rel = 'stylesheet';
+  link.href = href;
+  document.body.appendChild(link);
+}

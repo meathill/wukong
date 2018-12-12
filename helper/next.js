@@ -18,7 +18,8 @@ export function next(dom) {
 }
 
 export function play(dom, classes) {
-  dom.classList.add(classes);
+  classes = classes.split(' ');
+  dom.classList.add(...classes);
   return next(dom);
 }
 
