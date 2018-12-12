@@ -32,7 +32,7 @@ export default class View extends EventEmitter {
   }
 
   enter() {
-    this.el.classList.remove('pause');
+    this.el.classList.remove('out');
   }
 
   exit() {

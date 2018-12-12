@@ -8,6 +8,7 @@ export default class Wukong {
     this.loading = loading;
     this.progress = document.querySelector(progress);
     this.callbacks = {};
+    this.isReady = false;
 
     this.onProgress = this._onProgress.bind(this);
     this.onComplete = this._onComplete.bind(this);
@@ -43,6 +44,11 @@ export default class Wukong {
 
   _onComplete() {
     console.log('Wukong: all loaded');
+    if (this.isReady) {
+      return;
+    }
+    this.isReady = true;
+    this.queue.off('complete', this.onComplete);
     let app = new H5App(this.queue);
 
     if (!DEV && !isWeixin) {

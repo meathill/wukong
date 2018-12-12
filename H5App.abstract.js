@@ -51,19 +51,19 @@ export default class AbstractH5App {
     }
     page.innerHTML = html;
     page.id = name;
-    page.className = 'container page out hide';
-    this.pages[name] = page;
+    page.className = 'container page out';
+    container.appendChild(page);
     // 看是否需要用类包裹
     let klass = this.getKlass(name);
     if (klass) {
-      new klass(page);
+      page = new klass(page, this.queue, options);
     }
-    container.appendChild(page);
+    this.pages[name] = page;
     return page;
   }
 
   replaceURL(html) {
-    return html.replace(/{{(.*)}}/g, (match, url) => {
+    return html.replace(/{{(.*?)}}/g, (match, url) => {
       return this.getResourceURL(url);
     });
   }
@@ -111,6 +111,7 @@ export default class AbstractH5App {
       .then(() => {
         if (page !== 'home') {
           page = this.createPage(page);
+          page.enter();
         }
         this.currentPage = page;
       });

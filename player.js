@@ -18,7 +18,7 @@ export default class Player {
     let el = this.el = document.createElement('div');
     el.id = 'player';
     el.className = 'hide';
-    el.innerHTML = '<i class="fa fa-music fa-spin"></i>';
+    el.innerHTML = '<i class="fas fa-music fa-spin"></i>';
     this.icon = el.firstChild;
     document.body.appendChild(el);
   }
