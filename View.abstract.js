@@ -24,6 +24,7 @@ export default class View extends EventEmitter {
     this.el.addEventListener('animationend', event => {
       if (event.target === this.el && event.animationName === 'fadeOut') {
         this.el.classList.add('hide');
+        this.el.classList.remove('fadeOut');
         if (this.hidden) {
           this.hidden();
         }
@@ -32,7 +33,7 @@ export default class View extends EventEmitter {
   }
 
   enter() {
-    this.el.classList.remove('out');
+    this.el.classList.remove('out', 'hide');
   }
 
   exit() {
