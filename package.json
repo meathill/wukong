@@ -1,5 +1,6 @@
 {
   "name": "wukong",
+  "name": "wukong-h5",
   "version": "0.1.0",
   "description": "wukong is a h5 framework, providing some simple features like preload",
   "main": "wukong.js",
@@ -11,10 +12,10 @@
   "author": "Meathill <meathill@gmail.com> (http://meathill.com/)",
   "license": "MIT",
   "devDependencies": {
-    "@babel/core": "^7.15.0",
-    "@babel/preset-env": "^7.15.0",
+    "@babel/core": "^7.15.4",
+    "@babel/preset-env": "^7.15.4",
     "babel-loader": "^8.2.2",
-    "webpack": "^5.51.1",
+    "webpack": "^5.51.2",
     "webpack-cli": "^4.8.0"
   },
   "dependencies": {
